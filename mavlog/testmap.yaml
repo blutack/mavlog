@@ -1,0 +1,25 @@
+---
+devices:
+  ap:
+    type: mavlink_ap
+    port: /dev/ttyACM0
+    baud: 115200
+    messages:
+      GLOBAL_POSITION_INT:
+        lat: lat
+        lon: lon
+
+      GPS_TIME:
+        gps_time: time
+        
+  aeroprobe:
+    type: aeroprobe_adc
+    port: /dev/ttyUSB0
+    
+#  co2:
+#    type: gascard
+#    port: /dev/ttyUSB1
+    
+format: csv
+template: "{{ap.lat}},{{ap.lon}}"
+rate: 10
