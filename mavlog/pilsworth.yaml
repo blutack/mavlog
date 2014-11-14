@@ -2,7 +2,7 @@
 devices:
   ap:
     type: mavlink_ap
-    port: /dev/ttyACM0
+    port: /dev/ttyO4
     baud: 115200
     messages:
       GLOBAL_POSITION_INT:
@@ -14,12 +14,13 @@ devices:
         
   aeroprobe:
     type: aeroprobe_adc
-    port: /dev/ttyUSB0
+    port: /dev/ttyO2
     
   co2:
     type: gascard
-    port: /dev/ttyUSB1
+    port: /dev/ttyO1
+    baud: 9600
     
 format: csv
-template: "{{ap.lat}},{{ap.lon}}"
+template: "{{ap.time}},{{ap.lat}},{{ap.lon}}"
 rate: 10

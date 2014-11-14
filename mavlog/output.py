@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime, time
-import logging, schedule, threading
+import logging, threading
 
 class output:
   def __init__(self, devices, rate=10):
