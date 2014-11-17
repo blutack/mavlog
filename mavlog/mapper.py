@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys, yaml, importlib, signal, logging, output
+import os, sys, yaml, importlib, signal, logging, output
 
 class Mapper:
 
@@ -19,7 +19,11 @@ class Mapper:
       print self.devices[name]
       
     self.output = output.output(self.devices, self.mapping)
-    
+
+def setup_bbb_serial():
+  os.system("echo BB-UART2 > /sys/devices/bone_capemgr.*/slots")
+  os.system("echo BB-UART4 > /sys/devices/bone_capemgr.*/slots")
+
 if __name__ == "__main__":
   print sys.argv[1]
   m = Mapper(sys.argv[1])
