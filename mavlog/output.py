@@ -26,15 +26,16 @@ class output:
     
   def template(self, time, data):
     templ = Template(self.template_string)
+    combined = {'time': time}
     for device in data:
-      print data[device].get_data()
-    #return templ.render(data)
+      combined[device] = data[device].get_data()
+    return templ.render(combined)
     
   def process(self):
     lastTick = time.time()
     while self.running:
       if (time.time() - lastTick) > (1.0/self.rate):
-        self.template(time.time(), self.devices)
+        print self.template(time.time(), self.devices)
         lastTick = time.time()
       
       time.sleep(0.001)

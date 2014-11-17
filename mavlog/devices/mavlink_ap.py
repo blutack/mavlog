@@ -42,4 +42,4 @@ class mavlink_ap:
   def post_process(self, msg): 
     if msg.get_type() in self.messages.keys():
       for item in self.messages[msg.get_type()]:
-        setattr(self, self.messages[msg.get_type()][item], getattr(msg, item))
+        setattr(self, self.messages[item], getattr(msg, item))

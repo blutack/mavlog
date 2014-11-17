@@ -22,5 +22,5 @@ devices:
     baud: 9600
     
 format: csv
-template: "{{ap.time}},{{ap.lat}},{{ap.lon}}"
+template: "{{time}},{{ap.time}}"
 rate: 10
