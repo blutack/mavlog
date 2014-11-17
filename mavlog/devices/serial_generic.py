@@ -4,13 +4,14 @@ import logging, threading
 
 class serial_generic:
   
-  def __init__(self, device, baud=115200):
+  def __init__(self, options):
     self.stopped = threading.Event()
-    
     self.data = {}
     self.data['errors'] = 0
     
-    self.conn = serial.serial_for_url(device, baud, timeout=0.1)
+    options['baud'] = 115200 if not 'baud' in options else options['baud']
+
+    self.conn = serial.serial_for_url(options['port'], options['baud'], timeout=0.1)
     
     self.thread = threading.Thread(target = self.read)
     self.thread.daemon = True

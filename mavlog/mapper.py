@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import yaml, importlib, signal, logging, output
+import sys, yaml, importlib, signal, logging, output
 
 class Mapper:
 
@@ -21,5 +21,6 @@ class Mapper:
     self.output = output.output(self.devices)
     
 if __name__ == "__main__":
-  m = Mapper("testmap.yaml")
+  print sys.argv[1]
+  m = Mapper(sys.argv[1])
   signal.pause()
