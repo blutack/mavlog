@@ -18,7 +18,7 @@ class Mapper:
       self.devices[name] = klass(options)
       print self.devices[name]
       
-    self.output = output.output(self.devices)
+    self.output = output.output(self.devices, self.mapping)
     
 if __name__ == "__main__":
   print sys.argv[1]
