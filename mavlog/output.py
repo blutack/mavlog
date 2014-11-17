@@ -10,7 +10,7 @@ class output:
     self.f = open(self.f_name, 'a+')
     self.devices = devices
     self.rate = mapping['rate']
-    self.template = mapping['template']
+    self.template_string = mapping['template']
     
     self.logger = logging.getLogger(__name__)
     self.logger.info("Started with %s" % self.f_name)
@@ -25,8 +25,9 @@ class output:
     return datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + " Log.csv"
     
   def template(self, time, data):
-    templ = Template(self.template)
-    print data
+    templ = Template(self.template_string)
+    for device in data:
+      print data[device].get_data()
     #return templ.render(data)
     
   def process(self):
