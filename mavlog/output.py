@@ -12,6 +12,7 @@ class output:
     self.rate = mapping['rate']
     self.template_string = mapping['template']
     
+    self.f.write(self.template_string + "\n")
     self.logger = logging.getLogger(__name__)
     self.logger.info("Started with %s" % self.f_name)
     
