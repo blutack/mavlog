@@ -18,6 +18,14 @@ class mavlink_ap:
     self.thread.daemon = True
     self.thread.start()
     
+  def get_data(self, blocking = False):
+    # Not recommended for use outside testing
+    if blocking:
+      while self.data == {'errors': 0}:
+        pass
+        
+    return self.data
+    
   def stop(self):
     self.running = False
     
