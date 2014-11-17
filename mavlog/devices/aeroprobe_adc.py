@@ -7,7 +7,7 @@ class aeroprobe_adc(serial_generic):
     try:
       chunks = [chunk.strip() for chunk in msg.split(",")]
       
-      if len(chunks) != 7:
+      if len(chunks) != 8:
         raise ValueError
       
       checksum = int(chunks[7], 16)
