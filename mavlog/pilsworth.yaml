@@ -3,14 +3,38 @@ devices:
   ap:
     type: mavlink_ap
     port: /dev/ttyO4
-    baud: 115200
+    baud: 57600
     messages:
       GLOBAL_POSITION_INT:
         lat: lat
         lon: lon
+        alt: alt
+        relative_alt: relative_alt
+        vx: vx
+        vy: vy
+        vz: vz
+        hdg: hdg
 
-      GPS_TIME:
-        gps_time: time
+      GPS_RAW_INT:
+        fix_type: fix_type
+        eph: eph
+        epv: epv
+        vel: ground_speed
+        cog: cog
+      
+      VFR_HUD:
+        airspeed: airspeed
+
+      ATTITUDE:
+        roll: roll
+        pitch: pitch
+        yaw: yaw
+        rollspeed: rollspeed
+        pitchspeed: pitchspeed
+        yawspeed: yawspeed
+
+      SYSTEM_TIME:
+        time_unix_usec: time
         
   aeroprobe:
     type: aeroprobe_adc
@@ -22,5 +46,11 @@ devices:
     baud: 9600
     
 format: csv
-template: "{{time}},{{ap.time}}"
+template: >
+        {{time}},{{ap.time}},{{ap.lat}},{{ap.lon}},{{ap.alt}},{{ap.relative_alt}},{{ap.vx}},{{ap.vy}},{{ap.vz}},
+        {{ap.roll}},{{ap.pitch}},{{ap.yaw}},{{ap.rollspeed}},{{ap.pitchspeed}},{{ap.yawspeed}},{{ap.hdg}},{{ap.airspeed}},
+        {{aeroprobe.seq}},{{aeroprobe.tas}},{{aeroprobe.aoa}},{{aeroprobe.aos}},{{aeroprobe.palt}},{{aeroprobe.pstatic}},
+        {{aeroprobe.ptotal}},
+        {{co2.co2_ppm}}
+
 rate: 10

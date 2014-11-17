@@ -6,7 +6,7 @@ class mavlink_ap:
   
   def __init__(self, options):
     self.running = True
-    self.conn = mavutil.mavlink_connection(options['port'])
+    self.conn = mavutil.mavlink_connection(options['port'], baud=options['baud'])
     
     self.messages = options['messages']
     self.data = {}
@@ -42,4 +42,6 @@ class mavlink_ap:
   def post_process(self, msg): 
     if msg.get_type() in self.messages.keys():
       for item in self.messages[msg.get_type()]:
-        setattr(self, self.messages[item], getattr(msg, item))
+	tag = self.messages[msg.get_type()][item]
+	self.data[tag] = getattr(msg, item)
+        #setattr(self, self.messages[item], getattr(msg, item))

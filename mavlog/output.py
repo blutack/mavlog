@@ -28,6 +28,7 @@ class output:
     templ = Template(self.template_string)
     combined = {'time': time}
     for device in data:
+      #print data[device].get_data()
       combined[device] = data[device].get_data()
     return templ.render(combined)
     
