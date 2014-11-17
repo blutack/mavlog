@@ -25,6 +25,6 @@ def setup_bbb_serial():
   os.system("echo BB-UART4 > /sys/devices/bone_capemgr.*/slots")
 
 if __name__ == "__main__":
-  print sys.argv[1]
+  setup_bbb_serial()
   m = Mapper(sys.argv[1])
   signal.pause()
