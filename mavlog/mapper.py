@@ -21,9 +21,9 @@ class Mapper:
     self.output = output.output(self.devices, self.mapping)
 
 def setup_bbb_serial():
-  os.system("echo BB-UART1 > /sys/devices/bone_capemgr.*/slots")
-  os.system("echo BB-UART2 > /sys/devices/bone_capemgr.*/slots")
-  os.system("echo BB-UART4 > /sys/devices/bone_capemgr.*/slots")
+  os.system("/bin/bash -c 'echo BB-UART1 > /sys/devices/bone_capemgr.*/slots'")
+  os.system("/bin/bash -c 'echo BB-UART2 > /sys/devices/bone_capemgr.*/slots'")
+  os.system("/bin/bash -c 'echo BB-UART4 > /sys/devices/bone_capemgr.*/slots'")
 
 if __name__ == "__main__":
   setup_bbb_serial()

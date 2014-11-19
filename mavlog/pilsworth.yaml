@@ -53,4 +53,5 @@ template: >
         {{aeroprobe.ptotal}},
         {{co2.co2_ppm}}
 
+log_path: /data/logs
 rate: 10

@@ -2,12 +2,15 @@
 import datetime, time
 import logging, threading
 from jinja2 import Template
+import os
 
 class output:
   def __init__(self, devices, mapping):
     self.running = True
+    self.log_path = mapping['log_path']
+
     self.f_name = self.generate_filename()
-    self.f = open(self.f_name, 'a+')
+    self.f = open(self.f_name, 'a+', 1)
     self.devices = devices
     self.rate = mapping['rate']
     self.template_string = mapping['template']
@@ -23,8 +26,18 @@ class output:
     self.logger.info(__name__ + " shutdown")
     
   def generate_filename(self):
-    return datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S') + " Log.csv"
+    return self.log_path + "/" + "Log." + str(self.next_number()).zfill(3) + ".csv"
+
+  def next_number(self):
+    highest = 1
+
+    for fn in os.listdir(self.log_path):
+      current = int(fn.split('.')[1])
+      if current >= highest:
+        highest = current + 1
     
+    return highest    
+
   def template(self, time, data):
     templ = Template(self.template_string)
     combined = {'time': time}
@@ -37,7 +50,7 @@ class output:
     lastTick = time.time()
     while self.running:
       if (time.time() - lastTick) > (1.0/self.rate):
-        print self.template(time.time(), self.devices)
+        self.f.write(self.template(time.time(), self.devices) + "\n")
         lastTick = time.time()
       
       time.sleep(0.001)

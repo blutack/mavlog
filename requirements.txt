@@ -3,3 +3,4 @@ docopt==0.6.1
 pyserial
 pymavlink
 pyyaml
+jinja2
